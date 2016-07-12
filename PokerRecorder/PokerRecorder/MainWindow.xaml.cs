@@ -23,6 +23,7 @@ namespace PokerRecorder
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }
