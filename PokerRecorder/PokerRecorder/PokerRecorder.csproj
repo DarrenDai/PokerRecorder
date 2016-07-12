@@ -60,6 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToInvisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="TypeEnum.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -105,10 +107,62 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Pokers\A1.jpg" />
+    <Resource Include="Images\Pokers\A10.jpg" />
     <Resource Include="Images\Pokers\A2.jpg" />
+    <Resource Include="Images\Pokers\A3.jpg" />
+    <Resource Include="Images\Pokers\A4.jpg" />
+    <Resource Include="Images\Pokers\A5.jpg" />
+    <Resource Include="Images\Pokers\A6.jpg" />
+    <Resource Include="Images\Pokers\A7.jpg" />
+    <Resource Include="Images\Pokers\A8.jpg" />
+    <Resource Include="Images\Pokers\A9.jpg" />
+    <Resource Include="Images\Pokers\AJ.jpg" />
+    <Resource Include="Images\Pokers\AK.jpg" />
+    <Resource Include="Images\Pokers\AQ.jpg" />
+    <Resource Include="Images\Pokers\B1.jpg" />
+    <Resource Include="Images\Pokers\B10.jpg" />
+    <Resource Include="Images\Pokers\B2.jpg" />
+    <Resource Include="Images\Pokers\B3.jpg" />
+    <Resource Include="Images\Pokers\B4.jpg" />
+    <Resource Include="Images\Pokers\B5.jpg" />
+    <Resource Include="Images\Pokers\B6.jpg" />
+    <Resource Include="Images\Pokers\B7.jpg" />
+    <Resource Include="Images\Pokers\B8.jpg" />
+    <Resource Include="Images\Pokers\B9.jpg" />
+    <Resource Include="Images\Pokers\BJ.jpg" />
+    <Resource Include="Images\Pokers\BK.jpg" />
+    <Resource Include="Images\Pokers\BQ.jpg" />
+    <Resource Include="Images\Pokers\C1.jpg" />
+    <Resource Include="Images\Pokers\C10.jpg" />
+    <Resource Include="Images\Pokers\C2.jpg" />
+    <Resource Include="Images\Pokers\C3.jpg" />
+    <Resource Include="Images\Pokers\C4.jpg" />
+    <Resource Include="Images\Pokers\C5.jpg" />
+    <Resource Include="Images\Pokers\C6.jpg" />
+    <Resource Include="Images\Pokers\C7.jpg" />
+    <Resource Include="Images\Pokers\C8.jpg" />
+    <Resource Include="Images\Pokers\C9.jpg" />
+    <Resource Include="Images\Pokers\CJ.jpg" />
+    <Resource Include="Images\Pokers\CK.jpg" />
+    <Resource Include="Images\Pokers\CQ.jpg" />
+    <Resource Include="Images\Pokers\D1.jpg" />
+    <Resource Include="Images\Pokers\D10.jpg" />
+    <Resource Include="Images\Pokers\D2.jpg" />
+    <Resource Include="Images\Pokers\D3.jpg" />
+    <Resource Include="Images\Pokers\D4.jpg" />
+    <Resource Include="Images\Pokers\D5.jpg" />
+    <Resource Include="Images\Pokers\D6.jpg" />
+    <Resource Include="Images\Pokers\D7.jpg" />
+    <Resource Include="Images\Pokers\D8.jpg" />
+    <Resource Include="Images\Pokers\D9.jpg" />
+    <Resource Include="Images\Pokers\DJ.jpg" />
+    <Resource Include="Images\Pokers\DK.jpg" />
+    <Resource Include="Images\Pokers\DQ.jpg" />
+    <Resource Include="Images\Pokers\S.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Pokers\A1.jpg" />
+    <Resource Include="Images\Pokers\B.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

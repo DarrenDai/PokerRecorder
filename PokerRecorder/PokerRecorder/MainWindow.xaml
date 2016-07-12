@@ -17,12 +17,12 @@
                     <ControlTemplate TargetType="{x:Type CheckBox}">
                         <Border  x:Name="Border" CornerRadius="3" Background="#01FFFFFF">
                             <Grid>
-                                <Image Name="image" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
-                                       Source="{Binding DataContext.Image,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                <!--<ContentPresenter Margin="4,0,0,0"
+                                <ContentPresenter Margin="4,0,0,0"
                                                                 VerticalAlignment="Top"
                                                                 HorizontalAlignment="Left"
-                                                                RecognizesAccessKey="True"/>-->
+                                                                RecognizesAccessKey="True"/>
+                                <Image Name="image" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                                       Source="{Binding DataContext.Image,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>        
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -44,7 +44,7 @@
         </Style>
         
         <DataTemplate x:Key="PokerDataTemplate">
-            <Border Margin="3" CornerRadius="4" Background="White">
+            <Border Margin="2" CornerRadius="4" Background="White">
                 <Grid>
                     <CheckBox Content="{Binding Name}" Width="100" Height="150"  Cursor="Hand" IsChecked="{Binding IsChecked}">
                         <i:Interaction.Triggers>
@@ -57,7 +57,7 @@
             </Border>
         </DataTemplate>
     </Window.Resources>
-    <Grid Margin="20">
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -66,7 +66,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
-            <Button Content="New" Command="{Binding NewCommand}" Padding="10 5"/>
+            <Button Content="New" Command="{Binding NewCommand}" Padding="10 5" Margin="0 0 0 5"/>
         </StackPanel>
         <ItemsControl ItemsSource="{Binding Pokers}" Grid.Row="1" ItemTemplate="{StaticResource PokerDataTemplate}">
             <ItemsControl.ItemsPanel>
