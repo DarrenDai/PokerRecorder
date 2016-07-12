@@ -27,7 +27,7 @@ namespace PokerRecorder
         {
             Initialize();
             NewCommand = new DelegateCommand(() => { Initialize(); });
-            ClickedCommand = new DelegateCommand(SetLeftPokers);
+            ClickedCommand = new DelegateCommand(OnItemClicked);
         }
 
         #endregion
@@ -50,6 +50,13 @@ namespace PokerRecorder
             }
         }
 
+        public int LeftCount
+        {
+            get { return LeftPorkers.Count; }
+        }
+
+        public bool IsHideOutPokers { get; set; }
+
         #endregion
 
         #region 命令
@@ -62,15 +69,19 @@ namespace PokerRecorder
 
         #region 命令处理方法
 
-        private void SetLeftPokers()
+        private void OnItemClicked()
         {
+            LeftPorkers.Clear();
+
+            var temp = Pokers.ToList();
+            if (IsHideOutPokers) Pokers.Clear();
+            foreach (var item in temp.Where(x => !x.IsChecked))
             {
-                LeftPorkers.Clear();
-                foreach (var item in Pokers.Where(x => !x.IsChecked))
-                {
-                    LeftPorkers.Add(item);
-                }
+                LeftPorkers.Add(item);
+                if (IsHideOutPokers) Pokers.Add(item);
             }
+
+            OnPropertyChanged("LeftCount");
         }
 
         #endregion
@@ -112,7 +123,7 @@ namespace PokerRecorder
                 });
             }
 
-            SetLeftPokers();
+            OnItemClicked();
         }
 
         #endregion

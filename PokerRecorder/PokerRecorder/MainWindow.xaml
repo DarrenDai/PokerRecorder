@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="PokerRecorder" Height="600" Width="800"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:PokerRecorder.Converters"
         >
     <Window.Background>
         <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
@@ -11,24 +12,24 @@
         </LinearGradientBrush>
     </Window.Background>
     <Window.Resources>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <Style TargetType="CheckBox">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
                         <Border  x:Name="Border" CornerRadius="3" Background="#01FFFFFF">
                             <Grid>
-                                <ContentPresenter Margin="4,0,0,0"
+                                <!--<ContentPresenter Margin="4,0,0,0"
                                                                 VerticalAlignment="Top"
                                                                 HorizontalAlignment="Left"
-                                                                RecognizesAccessKey="True"/>
+                                                                RecognizesAccessKey="True"/>-->
                                 <Image Name="image" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
-                                       Source="{Binding DataContext.Image,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>        
+                                       Source="{Binding DataContext.Image,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="LightGray"/>
-                                <Setter TargetName="image" Property="Opacity" Value="0.4"/>
+                                <Setter TargetName="image" Property="Opacity" Value="0.2"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter TargetName="Border" Property="Background" Value="LightBlue" />
@@ -42,9 +43,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <DataTemplate x:Key="PokerDataTemplate">
-            <Border Margin="2" CornerRadius="4" Background="White">
+            <Border Margin="2" CornerRadius="4" Background="#02FFFFFF">
                 <Grid>
                     <CheckBox Content="{Binding Name}" Width="100" Height="150"  Cursor="Hand" IsChecked="{Binding IsChecked}">
                         <i:Interaction.Triggers>
@@ -67,6 +68,10 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Content="New" Command="{Binding NewCommand}" Padding="10 5" Margin="0 0 0 5"/>
+            <CheckBox Foreground="White" Style="{x:Null}" IsChecked="{Binding IsHideOutPokers}" Content="隐藏已出" VerticalAlignment="Center" Margin="10 0 0 0"/>
+            <CheckBox Foreground="White" Style="{x:Null}" x:Name="ShowExistPokers" Content="显示剩余" VerticalAlignment="Center" Margin="10 0 0 0"/>
+            <TextBlock Foreground="White" Text="剩余张数：" Margin="10 0 0 0" VerticalAlignment="Center"/>
+            <TextBlock Foreground="White" FontSize="17" Text="{Binding LeftCount}" VerticalAlignment="Center"/>
         </StackPanel>
         <ItemsControl ItemsSource="{Binding Pokers}" Grid.Row="1" ItemTemplate="{StaticResource PokerDataTemplate}">
             <ItemsControl.ItemsPanel>
@@ -75,7 +80,8 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl ItemsSource="{Binding LeftPorkers}" Grid.Row="2" ItemTemplate="{StaticResource PokerDataTemplate}">
+        <ItemsControl ItemsSource="{Binding LeftPorkers}" Grid.Row="2" ItemTemplate="{StaticResource PokerDataTemplate}"
+                      Visibility="{Binding Path=IsChecked, ElementName=ShowExistPokers,Converter={StaticResource BoolToVisibilityConverter}}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>
