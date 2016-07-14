@@ -17,22 +17,26 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border  x:Name="Border" CornerRadius="3" Background="#01FFFFFF">
+                        <Border  x:Name="Border" CornerRadius="3" Background="#01FFFFFF" BorderBrush="LightGray" BorderThickness="1">
                             <Grid>
                                 <!--<ContentPresenter Margin="4,0,0,0"
                                                                 VerticalAlignment="Top"
                                                                 HorizontalAlignment="Left"
                                                                 RecognizesAccessKey="True"/>-->
-                                <Image Name="image" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                                <Image Name="PokerPicture" Width="100" Margin="0 0 -70 0" Height="{TemplateBinding Height}" HorizontalAlignment="Left"
                                        Source="{Binding DataContext.Image,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="image" Property="Opacity" Value="0.2"/>
+                                <Setter TargetName="PokerPicture" Property="Opacity" Value="0.2"/>
+                                <Setter TargetName="Border" Property="Opacity" Value="0.3" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter TargetName="Border" Property="Background" Value="LightBlue" />
+                                <Setter TargetName="PokerPicture" Property="Width" Value="110"/>
+                                <Setter TargetName="PokerPicture" Property="Height" Value="160"/>
+                                <Setter TargetName="PokerPicture" Property="Margin" Value="-5 -5 -70 -5"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter TargetName="Border" Property="Background" Value="LightGreen" />
@@ -44,10 +48,24 @@
             </Setter>
         </Style>
 
-        <DataTemplate x:Key="PokerDataTemplate">
+        <DataTemplate x:Key="PokerDataTemplate1">
             <Border Margin="2" CornerRadius="4" Background="#02FFFFFF">
                 <Grid>
                     <CheckBox Content="{Binding Name}" Width="100" Height="150"  Cursor="Hand" IsChecked="{Binding IsChecked}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding DataContext.ClickedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PokerDataTemplate">
+            <Border Margin="2" CornerRadius="4" Background="#02FFFFFF">
+                <Grid>
+                    <CheckBox Content="{Binding Name}" Width="30" Height="150"  Cursor="Hand" IsChecked="{Binding IsChecked}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding DataContext.ClickedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
@@ -73,7 +91,7 @@
             <TextBlock Foreground="White" Text="剩余张数：" Margin="10 0 0 0" VerticalAlignment="Center"/>
             <TextBlock Foreground="White" FontSize="17" Text="{Binding LeftCount}" VerticalAlignment="Center"/>
         </StackPanel>
-        <ItemsControl ItemsSource="{Binding Pokers}" Grid.Row="1" ItemTemplate="{StaticResource PokerDataTemplate}">
+        <ItemsControl ItemsSource="{Binding Pokers}" Grid.Row="1" ItemTemplate="{StaticResource PokerDataTemplate1}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" />
